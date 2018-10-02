@@ -45,23 +45,24 @@ public class LocacaoService {
             acc ++;
             switch(acc){
                 case 1:
-                    acumulador = acumulador + locacao.getValor();
+                    acumulador = acumulador + filme.getPrecoLocacao();
                     break;
                 case 2:
-                    acumulador = acumulador + locacao.getValor();
+                    acumulador = acumulador + filme.getPrecoLocacao();
                     break;
                 case 3:
-                    acumulador = acumulador + (locacao.getValor() * 0.75);
+                    acumulador = acumulador + (filme.getPrecoLocacao() * 0.75);
                     break;
                 case 4:
-                    acumulador = acumulador + (locacao.getValor() * 0.5);
+                    acumulador = acumulador + (filme.getPrecoLocacao() * 0.5);
                     break;
                 case 5:
-                    acumulador = acumulador + (locacao.getValor() * 0);
+                    acumulador = acumulador + (filme.getPrecoLocacao() * 0);
                     break;
                     
             }
         }
+        locacao.setValor(acumulador);
        
         //Salvando a locacao...	
         //TODO adicionar método para salvar
