@@ -12,6 +12,8 @@ import local.exception.FilmeSemEstoqueException;
 import local.exception.LocadoraException;
 
 public class LocacaoService {
+    double acumulador = 0;
+    int acc = 0;
 //TODO atualizar para muitos filmes
     public Locacao alugarFilme(Cliente cliente, List<Filme> filmes) throws FilmeSemEstoqueException, LocadoraException {
         if (cliente == null) {
@@ -24,21 +26,43 @@ public class LocacaoService {
 
         Locacao locacao = new Locacao();
         locacao.setCliente(cliente);
-
+        
         for(Filme filme: filmes) {
             if (filme.getEstoque() == 0) {
                 throw new FilmeSemEstoqueException("Filme sem estoque");
             }
 
             locacao.addFilme(filme);
+         
             locacao.setDataLocacao(new Date());
             locacao.setValor(filme.getPrecoLocacao());
-
+            
+            
             //Entrega no dia seguinte
             Date dataEntrega = new Date();
             dataEntrega = adicionarDias(dataEntrega, 1);
             locacao.setDataRetorno(dataEntrega);
+            acc ++;
+            switch(acc){
+                case 1:
+                    acumulador = acumulador + locacao.getValor();
+                    break;
+                case 2:
+                    acumulador = acumulador + locacao.getValor();
+                    break;
+                case 3:
+                    acumulador = acumulador + (locacao.getValor() * 0.75);
+                    break;
+                case 4:
+                    acumulador = acumulador + (locacao.getValor() * 0.5);
+                    break;
+                case 5:
+                    acumulador = acumulador + (locacao.getValor() * 0);
+                    break;
+                    
+            }
         }
+       
         //Salvando a locacao...	
         //TODO adicionar método para salvar
         return locacao;
