@@ -60,7 +60,7 @@ public class LocacaoServiceTest {
     public void deveValidarValorLocacao() throws FilmeSemEstoqueException, LocadoraException {
         //TODO: Reescrever teste
         //Cenário
-
+       
         //Processamento
 
         //Validação
@@ -71,9 +71,9 @@ public class LocacaoServiceTest {
     public void deveRealizarLocacao(){
         //TODO: Deve realizar uma locação caso os argumentos sejam apropriados
         //Cenário
-
+        
         //Processamento
-
+        
         //Validação
     }
 
