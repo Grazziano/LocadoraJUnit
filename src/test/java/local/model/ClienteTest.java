@@ -1,5 +1,36 @@
 package local.model;
 
+<<<<<<< HEAD
+import static org.hamcrest.CoreMatchers.is;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class ClienteTest {
+    //TODO: O nome não pode ser nulo. Lança RuntimeException -  Nome é um campo obrigatório
+    //TODO: nome deve possuir entre 4 e 55 caracteres (inclusive). Lança ClienteException - O nome do cliente deve possuir entre 4 e 55 caracteres
+    
+    @Test
+    public void deveAceitarNomeCom4Caracteres(){
+        //cenário
+        Cliente cliente = new Cliente();
+        //Processamento e validação
+        cliente.setNome("João");
+        Assert.assertThat(cliente.getNome(), is("João"));
+    }
+    
+    //TODO: O nome do cadastro deve possuir pelo menos 2 nomes (ex.: Angelo Luz)
+    @Test
+    public void deveAceitarDoisNomesNoCadastro(){
+    //Cenário
+    Cliente cliente = new Cliente(); 
+    //Processamento
+    cliente.setNome("Luiz Domingues");
+    
+    }
+    
+    //TODO: O nome deverá ser salvo sem espaços no início e fim
+    //TODO: O nome não deverá possuir símbolo ou número.Lança ClienteException - Números e símbolos não são permitidos
+=======
 import local.exception.ClienteException;
 import org.assertj.core.internal.bytebuddy.utility.RandomString;
 import org.junit.Rule;
@@ -12,6 +43,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class ClienteTest {
+>>>>>>> d407e868636ca9a0f5e1b2f597fd2cf7b91a79a8
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
