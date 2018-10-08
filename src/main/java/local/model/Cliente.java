@@ -1,6 +1,7 @@
 package local.model;
 
 import local.exception.ClienteException;
+import org.assertj.core.internal.bytebuddy.utility.RandomString;
 
 import javax.validation.constraints.Size;
 
@@ -9,7 +10,9 @@ public class Cliente {
 
 	private String nome;
 	
-	public Cliente() {}
+	public Cliente() {
+
+	}
 	
 	public Cliente(String nome) {
 		this.nome = nome;
@@ -30,7 +33,14 @@ public class Cliente {
 		if(!nome.matches("[a-zA-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃçÇ ]+")){
 			throw new ClienteException("Números e símbolos não são permitidos");
 		}
+<<<<<<< HEAD
                 this.nome = nome;                
+=======
+		if(!nome.contains(" ")){
+			throw new ClienteException("É necessário adicionar um sobrenome");
+		}
+		this.nome = nome;
+>>>>>>> d407e868636ca9a0f5e1b2f597fd2cf7b91a79a8
 	}
 
 	@Override
