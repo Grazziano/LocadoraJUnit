@@ -1,5 +1,6 @@
 package local.service;
 
+import java.time.Instant;
 import local.exception.FilmeSemEstoqueException;
 import local.exception.LocadoraException;
 import local.model.Filme;
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
 import static org.junit.Assert.*;
+import org.junit.Assume;
+import org.junit.Ignore;
 //TODO atualizar testes para trabalhar com os multiplos filmes
 
 public class LocacaoServiceTest {
@@ -92,12 +96,54 @@ public class LocacaoServiceTest {
     }
 
     @Test
-    public void deveDar25PorcentoDescontoNoTerceiroFilme() throws FilmeSemEstoqueException, LocadoraException {
+    public void deveDar25PorcentoDescontoNoTerceiroFilme() throws LocadoraException {
         LocacaoService loc = new LocacaoService();
 
         Locacao locacao = loc.alugarFilme(cliente, Arrays.asList(filmes.get(0), filmes.get(1), filmes.get(2)));
 
         assertThat(locacao.getValor(), is(11.0));
+
+    }
+
+    @Test
+    public void deveDar50PorcentoDescontoNoQuartoFilme() throws LocadoraException {
+        LocacaoService loc = new LocacaoService();
+
+        Locacao locacao = loc.alugarFilme(cliente, Arrays.asList(filmes.get(0), filmes.get(1), filmes.get(2), filmes.get(3)));
+
+        assertThat(locacao.getValor(), is(13.0));
+    }
+
+    @Test
+    public void deveDar100PorcentoDescontoNoQuintoFilme() throws LocadoraException {
+        LocacaoService loc = new LocacaoService();
+
+        Locacao locacao = loc.alugarFilme(cliente, Arrays.asList(filmes.get(0), filmes.get(1), filmes.get(2), filmes.get(3), filmes.get(4)));
+
+        assertThat(locacao.getValor(), is(13.0));
+    }
+
+    @Test
+    public void seLocarSabadoDeveEntregarSegunda() {
+
+        /* Date data = new Date();
+        Date dataEntrega = new Date();
+        if (DataUtils.verificarDiaSemana(data, Calendar.SATURDAY));
+        if (DataUtils.verificarDiaSemana(dataEntrega, Calendar.MONDAY));*/
+        Date dataLocacao = new Date();
+        Date dataEntrega = new Date();
+
+        String data = "";
+
+        if (DataUtils.verificarDiaSemana(dataLocacao, Calendar.SATURDAY)) {
+            dataEntrega = DataUtils.obterDataComDiferencaDias(2);
+
+            data = dataEntrega.toString();
+            assertTrue(data.contains("Mon"));
+        } else {
+            dataEntrega = DataUtils.obterDataComDiferencaDias(1);
+        }
+        System.out.println("Data de entrega: " + dataEntrega);
 
     }
 
