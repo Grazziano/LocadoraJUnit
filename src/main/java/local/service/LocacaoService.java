@@ -1,5 +1,6 @@
 package local.service;
 
+import java.util.Calendar;
 import static local.util.DataUtils.adicionarDias;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import local.model.Locacao;
 import local.model.Cliente;
 import local.exception.FilmeSemEstoqueException;
 import local.exception.LocadoraException;
+import local.util.DataUtils;
 
 public class LocacaoService {
     double acumulador = 0;
@@ -41,7 +43,11 @@ public class LocacaoService {
             //Entrega no dia seguinte
             Date dataEntrega = new Date();
             dataEntrega = adicionarDias(dataEntrega, 1);
-            locacao.setDataRetorno(dataEntrega);
+            if(DataUtils.verificarDiaSemana(dataEntrega, Calendar.SATURDAY)){
+                dataEntrega = adicionarDias(dataEntrega, 2);
+                locacao.setDataRetorno(dataEntrega);
+            }else{
+            locacao.setDataRetorno(dataEntrega);}
             acc ++;
             switch(acc){
                 case 1:

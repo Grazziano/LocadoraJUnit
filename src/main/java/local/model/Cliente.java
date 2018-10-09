@@ -26,16 +26,21 @@ public class Cliente {
 		if(nome==null){
 			throw new ClienteException("Nome não é um campo obrigatório");
 		}
-		if (nome.length()<=4 && nome.length()<55){
-			throw new ClienteException("O nome do cliente deve possuir entre 4 e 55 caracteres");
+		//if (nome.length()<=4 && nome.length()<55){
+                if (nome.length()<4 || nome.length()>55){
+               			throw new ClienteException("O nome do cliente deve possuir entre 4 e 55 caracteres");
 		}
 		if(!nome.matches("[a-zA-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃçÇ ]+")){
 			throw new ClienteException("Números e símbolos não são permitidos");
 		}
+<<<<<<< HEAD
+                this.nome = nome;                
+=======
 		if(!nome.contains(" ")){
 			throw new ClienteException("É necessário adicionar um sobrenome");
 		}
 		this.nome = nome;
+>>>>>>> d407e868636ca9a0f5e1b2f597fd2cf7b91a79a8
 	}
 
 	@Override
